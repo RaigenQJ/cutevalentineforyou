@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Love Expression</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('paper.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            height: calc(100vh - 50px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+        }
+
+        .love {
+            text-align: center;
+            color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .love h2 span {
+            color: red;
+        }
+
+        .love a {
+            display: inline-block;
+            font-size: 24px;
+            text-decoration: none;
+            padding: 30px 50px; /* Размеры кнопок */
+            margin: 10px;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute; /* Добавим это */
+        }
+
+        .love a:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="love">
+            <h2> <span></span> </h2>
+            <a id="no" href="no.html" style="left: 300px; top: -200px;">нет</a>
+            <a id="yes" href="yes.html" style="left: 450px; top: -200px;">да</a>
+        </div>
+    </div>
+
+    <script>
+        var noButton = document.getElementById('no');
+        var yesButton = document.getElementById('yes');
+        var clickCount = 0;
+
+        // Координаты для перемещения кнопки "нет"
+        var positions = [
+            { x: 0, y: -50 },
+            { x: 100, y: -90 },
+            { x: 120, y: -60 },
+            { x: 367, y: -100 },
+            { x: 500, y: -378 },
+            { x: 357, y: -632 },
+            { x: 24, y: 0 },
+            { x: 456, y: 0 },
+            { x: 45, y: -400 },
+            { x: 24, y: -536 }
+        ];
+
+        // Функция, которая изменяет положение кнопки "нет"
+        function changeButtonPosition(event) {
+            event.preventDefault();
+            clickCount++;
+
+            if (clickCount <= 10) {
+                var position = positions[clickCount - 1];
+
+                // Устанавливаем новые координаты кнопки "нет"
+                noButton.style.left = position.x + 'px';
+                noButton.style.top = position.y + 'px';
+            }
+
+            if (clickCount === 10) {
+                yesButton.removeAttribute('disabled');
+            }
+
+            if (clickCount > 10) {
+                window.location.href = "no.html";
+            }
+        }
+
+        noButton.addEventListener('click', changeButtonPosition);
+    </script>
+	<audio controls autoplay>
+		<source src="paskal.mp3" type="audio/mpeg" />
+		<source src="paskal.mp3" type="audio/ogg" />
+		Ваш браузер не поддерживает HTML5 аудио. Вот взамен <a href="paskal.mp3">ссылка на аудио</a>.
+	  </audio>
+</body>
+</html>
